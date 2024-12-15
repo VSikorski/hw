@@ -13,6 +13,18 @@ app.get('/api', (req, res) => {
     res.send('Welcome to the HW api\n');
 })
 
+app.post('/api/post/car', (req, res) => {
+
+    const carData = req.body;
+
+    if (!carData.name) {
+        return res.status(400).json({
+            error: 'Name is a required field\n'
+        });
+    }
+
+    res.send(`Received the following data: ${JSON.stringify(carData)}\n`);
+})
 
 
 /* ------------------------------ DOCUMENT SERVING ------------------------------ */
