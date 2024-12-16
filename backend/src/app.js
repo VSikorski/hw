@@ -11,25 +11,45 @@ app.use(express.static(frontendPath));
 /* ---------------------------------- REST API ---------------------------------- */
 
 app.get('/api', (req, res) => {
-    res.send('Welcome to the HW api\n');
+    return res.send('Welcome to the HW api\n');
+})
+
+app.delete('/api/delete/car', async (req, res) => {
+    const {id} = req.query;
+
+    if (!id) {
+        return res.status(400).json({ error: '`id` is a required parameter' });
+    }
+
+    try {
+        const car = await Car.findByPk(id);
+        if (!car) {
+            return res.status(404).json({ error: `Car record with specified 'id: ${id}' not found` });
+        }
+        await car.destroy();
+        return res.status(200).json({ message: `Car record with 'id: ${id}' successfully deleted` });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Error occurred deleting car record' });
+    }
 })
 
 app.get('/api/get/car', async (req,res) => {
     const {id} = req.query;
 
     if (!id) {
-        return res.status(400).json({ error: '`id` is a required parameter' })
+        return res.status(400).json({ error: '`id` is a required parameter' });
     }
 
     try {
         const car = await Car.findByPk(id);
         if (!car) {
-            return res.status(404).json({ error: `Car record with specified '${id} id' not found` })
+            return res.status(404).json({ error: `Car record with specified 'id: ${id}' not found` });
         }
-        res.status(200).json(car);
+        return res.status(200).json(car);
     } catch (err) {
         console.log(error);
-        res.status(500).json({ error: 'Error occured fetching car record'})
+        return res.status(500).json({ error: 'Error occured fetching car record'});
     }
 
 })
@@ -48,10 +68,10 @@ app.get('/api/get/cars', async (req,res) => {
                 }
             });
         }
-        res.status(200).json({cars});
+        return res.status(200).json({cars});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Error occured fetching car records'})
+        return res.status(500).json({ error: 'Error occured fetching car records'});
     }
 })
 
@@ -75,10 +95,10 @@ app.post('/api/post/car', async (req, res) => {
 
     try {
         const car = await Car.create(carData);
-        res.status(201).json({ message: 'Car record successfully inserted', data: carData});
+        return res.status(201).json({ message: 'Car record successfully inserted', data: carData});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Error occurred while inserting car record' })
+        return res.status(500).json({ error: 'Error occurred while inserting car record' });
     }
 
 })
