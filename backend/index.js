@@ -1,5 +1,6 @@
 const app = require('./src/app');
 const sequelize = require('./src/sequelizeInstance');
+const path = require('path');
 
 sequelize.sync()
     .then(() => {
@@ -13,4 +14,5 @@ sequelize.sync()
 const port = 3000;
 app.listen(port, () => {
     console.log('Server running on http://localhost:3000/');
+    //console.log('dir: ' + path.join(__dirname, '../../'));
 })

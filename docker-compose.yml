@@ -1,4 +1,13 @@
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - node-app
+
   node-app:
     build:
       context: ./backend
