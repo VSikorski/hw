@@ -14,6 +14,36 @@ app.get('/api', (req, res) => {
     return res.send('Welcome to the HW api\n');
 })
 
+app.patch('/api/patch/car', async (req, res) => {
+    const {id} = req.query;
+    const newCarData = req.body;
+
+    if (!id) {
+        return res.status(400).json({ error: '`id` is a required parameter' });
+    }
+
+    try {
+        const car = await Car.findByPk(id);
+        if (!car) {
+            return res.status(404).json({ error: `Car record with specified 'id: ${id}' not found` });
+        }
+        if (newCarData.name) {
+            car.name = newCarData.name;
+        }
+        if (newCarData.year) {
+            car.year = newCarData.year;
+        }
+        if (newCarData.image) {
+            car.image = newCarData.image;
+        }
+        await car.save();
+        return res.status(200).json({ message: `Car record with 'id: ${id}' successfully updated`, data: car });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Error occurred updating car record' });
+    }
+})
+
 app.delete('/api/delete/car', async (req, res) => {
     const {id} = req.query;
 
