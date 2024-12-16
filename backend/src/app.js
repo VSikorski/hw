@@ -14,6 +14,16 @@ app.get('/api', (req, res) => {
     res.send('Welcome to the HW api\n');
 })
 
+app.get('/api/get/car', async (req,res) => {
+    try {
+        const cars = await Car.findAll();
+        res.status(200).json({cars})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Error occured fetching car records'})
+    }
+})
+
 app.post('/api/post/car', async (req, res) => {
 
     const carData = req.body;
@@ -34,10 +44,10 @@ app.post('/api/post/car', async (req, res) => {
 
     try {
         const car = await Car.create(carData);
-        res.status(201).json({ message: 'Car record successfully inserted', data: JSON.stringify(carData)});
+        res.status(201).json({ message: 'Car record successfully inserted', data: carData});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Error occured while inserting car record' })
+        res.status(500).json({ error: 'Error occurred while inserting car record' })
     }
 
 })
