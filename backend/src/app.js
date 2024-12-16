@@ -15,9 +15,40 @@ app.get('/api', (req, res) => {
 })
 
 app.get('/api/get/car', async (req,res) => {
+    const {id} = req.query;
+
+    if (!id) {
+        return res.status(400).json({ error: '`id` is a required parameter' })
+    }
+
     try {
-        const cars = await Car.findAll();
-        res.status(200).json({cars})
+        const car = await Car.findByPk(id);
+        if (!car) {
+            return res.status(404).json({ error: `Car record with specified '${id} id' not found` })
+        }
+        res.status(200).json(car);
+    } catch (err) {
+        console.log(error);
+        res.status(500).json({ error: 'Error occured fetching car record'})
+    }
+
+})
+
+app.get('/api/get/cars', async (req,res) => {
+    const {year} = req.query;
+
+    try {
+        let cars;
+        if (!year) {
+            cars = await Car.findAll();
+        } else {
+            cars = await Car.findAll({
+                where: {
+                    year: parseInt(year, 10)
+                }
+            });
+        }
+        res.status(200).json({cars});
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Error occured fetching car records'})
