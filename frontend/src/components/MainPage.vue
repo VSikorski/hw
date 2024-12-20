@@ -2,16 +2,20 @@
   <div>
     <h6>Available cars:</h6>
     <ul>
-      <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+      <li v-for="item in items" :key="item.id"><CarCard :car="item"/></li>
     </ul>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import CarCard from './CarCard.vue';
 
 export default {
   name: 'MainPage',
+  components: {
+    CarCard
+  },
   data() {
     return {
       items: []
