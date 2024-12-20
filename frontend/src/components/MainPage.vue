@@ -44,6 +44,10 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(14, auto);
+  gap: 20px;
 }
 li {
   display: inline-block;

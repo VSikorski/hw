@@ -19,8 +19,8 @@ export default {
 
 <style scoped>
     .CarCard {
-        width: 3rem;
-        height: 3rem;
+        width: 10rem;
+        height: 14rem;
         background-color: bisque;
     }
 </style>
