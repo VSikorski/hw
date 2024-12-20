@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h6>Available cars:</h6>
     <ul>
       <li v-for="item in items" :key="item.id">{{ item.name }}</li>
