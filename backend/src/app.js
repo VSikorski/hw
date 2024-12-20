@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 const Car = require('./models/car');
 
 const frontendPath = path.join(__dirname, './frontend');
 
 app.use(express.json());
 app.use(express.static(frontendPath));
+app.use(cors());
 
 /* ---------------------------------- REST API ---------------------------------- */
 
