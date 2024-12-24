@@ -12,7 +12,7 @@ import axios from 'axios';
 import CarCard from './CarCard.vue';
 
 export default {
-  name: 'MainPage',
+  name: 'HomePage',
   components: {
     CarCard
   },

@@ -4,11 +4,8 @@ const app = express();
 const cors = require('cors');
 const Car = require('./models/car');
 
-const frontendPath = path.join(__dirname, './frontend');
-
-app.use(express.json());
-app.use(express.static(frontendPath));
 app.use(cors());
+app.use(express.json());
 
 /* ---------------------------------- REST API ---------------------------------- */
 
@@ -133,13 +130,6 @@ app.post('/api/post/car', async (req, res) => {
         return res.status(500).json({ error: 'Error occurred while inserting car record' });
     }
 
-})
-
-
-/* ------------------------------ DOCUMENT SERVING ------------------------------ */
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
 })
 
 module.exports = app;

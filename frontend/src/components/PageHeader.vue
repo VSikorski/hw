@@ -2,8 +2,8 @@
     <nav>
         <img alt="HW logo" class="logo" src="../assets/logo.png">
         <ul>
-            <li>home</li>
-            <li>user</li>
+            <li><router-link to="/">home</router-link></li>
+            <li><router-link to="/admin">admin</router-link></li>
         </ul>
     </nav>
 </template>
