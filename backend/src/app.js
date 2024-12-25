@@ -203,23 +203,23 @@ app.get('/api/get/car', async (req,res) => {
     try {
         const car = await Car.findByPk(id, {
             attributes: {
-                exclude: ['series_1', 'series_2', 'series_3']
+                exclude: ['series_1', 'series_2', 'series_3', 'createdAt', 'updatedAt']
             },
             include: [
                 {
                     model: Series,
                     as: 'series1',
-                    required: false,
+                    attributes: {exclude: ['createdAt', 'updatedAt']}
                 },
                 {
                     model: Series,
                     as: 'series2',
-                    required: false
+                    attributes: {exclude: ['createdAt', 'updatedAt']}
                 },
                 {
                     model: Series,
                     as: 'series3',
-                    required: false
+                    attributes: {exclude: ['createdAt', 'updatedAt']}
                 }
             ]
         });
@@ -240,23 +240,23 @@ app.get('/api/get/cars', async (req,res) => {
         if (!year) {
             cars = await Car.findAll({
                 attributes: {
-                    exclude: ['series_1', 'series_2', 'series_3']
+                    exclude: ['series_1', 'series_2', 'series_3', 'createdAt', 'updatedAt']
                 },
                 include: [
                     {
                         model: Series,
                         as: 'series1',
-                        required: false,
+                        attributes: {exclude: ['createdAt', 'updatedAt']}
                     },
                     {
                         model: Series,
                         as: 'series2',
-                        required: false
+                        attributes: {exclude: ['createdAt', 'updatedAt']}
                     },
                     {
                         model: Series,
                         as: 'series3',
-                        required: false
+                        attributes: {exclude: ['createdAt', 'updatedAt']}
                     }
                 ]
             });
@@ -266,23 +266,23 @@ app.get('/api/get/cars', async (req,res) => {
                     year: parseInt(year, 10)
                 },
                 attributes: {
-                    exclude: ['series_1', 'series_2', 'series_3']
+                    exclude: ['series_1', 'series_2', 'series_3', 'createdAt', 'updatedAt']
                 },
                 include: [
                     {
                         model: Series,
                         as: 'series1',
-                        required: false,
+                        attributes: {exclude: ['createdAt', 'updatedAt']}
                     },
                     {
                         model: Series,
                         as: 'series2',
-                        required: false
+                        attributes: {exclude: ['createdAt', 'updatedAt']}
                     },
                     {
                         model: Series,
                         as: 'series3',
-                        required: false
+                        attributes: {exclude: ['createdAt', 'updatedAt']}
                     }
                 ]
             });
