@@ -7,8 +7,9 @@ const Series = sequelizeInstance.define('Series', {
         primaryKey: true,
         autoIncrement: true
     },
-    type_class: {
-        type: DataTypes.STRING(15)
+    type: {
+        type: DataTypes.STRING(15),
+        allowNull: false
     },
     name: {
         type: DataTypes.STRING(100),
@@ -22,7 +23,7 @@ const Series = sequelizeInstance.define('Series', {
             max: new Date().getFullYear() + 3
         }
     },
-    set_count: {
+    setCount: {
         type: DataTypes.INTEGER,
         allowNull: false
     }

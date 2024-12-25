@@ -20,7 +20,7 @@ const Car = sequelizeInstance.define('Car', {
             max: new Date().getFullYear() + 3
         }
     },
-    type_class: {
+    type: {
         type: DataTypes.STRING(15)
     },
     image: {
@@ -48,9 +48,5 @@ const Car = sequelizeInstance.define('Car', {
         }
     }
 })
-
-Car.belongsTo(Series, { foreignKey: 'series_1', as: 'Series1' });
-Car.belongsTo(Series, { foreignKey: 'series_2', as: 'Series2' });
-Car.belongsTo(Series, { foreignKey: 'series_3', as: 'Series3' });
 
 module.exports = Car;
