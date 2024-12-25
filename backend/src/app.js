@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const Car = require('./models/car');
 const Series = require('./models/series');
+const associateModels = require('./models/associations');
+associateModels();
 
 app.use(cors());
 app.use(express.json());
@@ -17,7 +19,11 @@ app.get('/api', (req, res) => {
 
 app.post('/api/post/series', async (req, res) => {
     const seriesData = req.body;
-    if (!seriesData.type) {
+    if (!seriesData.id) {
+        return res.status(400).json({
+            error: '`id` is a required field'
+        });
+    } else if (!seriesData.type) {
         return res.status(400).json({
             error: '`type` is a required field'
         });
@@ -86,7 +92,7 @@ app.delete('/api/delete/series', async (req, res) => {
         return res.status(400).json({ error: '`id` is a required parameter' });
     }
     try {
-        const series = await Car.findByPk(id);
+        const series = await Series.findByPk(id);
         if (!series) {
             return res.status(404).json({ error: `Series record with specified id '${id}' not found` });
         }
@@ -195,7 +201,28 @@ app.get('/api/get/car', async (req,res) => {
         return res.status(400).json({ error: '`id` is a required parameter' });
     }
     try {
-        const car = await Car.findByPk(id);
+        const car = await Car.findByPk(id, {
+            attributes: {
+                exclude: ['series_1', 'series_2', 'series_3']
+            },
+            include: [
+                {
+                    model: Series,
+                    as: 'series1',
+                    required: false,
+                },
+                {
+                    model: Series,
+                    as: 'series2',
+                    required: false
+                },
+                {
+                    model: Series,
+                    as: 'series3',
+                    required: false
+                }
+            ]
+        });
         if (!car) {
             return res.status(404).json({ error: `Car record with specified id '${id}' not found` });
         }
@@ -211,12 +238,53 @@ app.get('/api/get/cars', async (req,res) => {
     try {
         let cars;
         if (!year) {
-            cars = await Car.findAll();
+            cars = await Car.findAll({
+                attributes: {
+                    exclude: ['series_1', 'series_2', 'series_3']
+                },
+                include: [
+                    {
+                        model: Series,
+                        as: 'series1',
+                        required: false,
+                    },
+                    {
+                        model: Series,
+                        as: 'series2',
+                        required: false
+                    },
+                    {
+                        model: Series,
+                        as: 'series3',
+                        required: false
+                    }
+                ]
+            });
         } else {
             cars = await Car.findAll({
                 where: {
                     year: parseInt(year, 10)
-                }
+                },
+                attributes: {
+                    exclude: ['series_1', 'series_2', 'series_3']
+                },
+                include: [
+                    {
+                        model: Series,
+                        as: 'series1',
+                        required: false,
+                    },
+                    {
+                        model: Series,
+                        as: 'series2',
+                        required: false
+                    },
+                    {
+                        model: Series,
+                        as: 'series3',
+                        required: false
+                    }
+                ]
             });
         }
         return res.status(200).json({cars});

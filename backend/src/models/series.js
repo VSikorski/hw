@@ -5,7 +5,7 @@ const Series = sequelizeInstance.define('Series', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        allowNull: false
     },
     type: {
         type: DataTypes.STRING(15),

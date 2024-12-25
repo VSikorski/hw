@@ -23,9 +23,6 @@ const Car = sequelizeInstance.define('Car', {
     type: {
         type: DataTypes.STRING(15)
     },
-    image: {
-        type: DataTypes.STRING(200)
-    },
     series_1: {
         type: DataTypes.INTEGER,
         references: {
@@ -46,7 +43,10 @@ const Car = sequelizeInstance.define('Car', {
             model: Series,
             key: 'id'
         }
-    }
+    },
+    image: {
+        type: DataTypes.STRING(200)
+    },
 })
 
 module.exports = Car;
