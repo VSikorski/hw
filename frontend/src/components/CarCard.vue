@@ -1,7 +1,7 @@
 <template>
-    <div class="CarCard">
+    <div class="car-card">
         <h6>{{ car.name }}</h6>
-        <img alt="" src="">
+        <img :alt=car.name :src=car.image>
     </div>
 </template>
 
@@ -18,9 +18,12 @@ export default {
 </script>
 
 <style scoped>
-    .CarCard {
-        width: 10rem;
-        height: 14rem;
-        background-color: bisque;
-    }
+.car-card {
+    width: 10rem;
+    height: 14rem;
+    background-color: bisque;
+}
+.car-card img {
+    width: 90%;
+}
 </style>

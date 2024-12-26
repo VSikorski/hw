@@ -1,6 +1,6 @@
 <template>
-    <nav>
-        <img alt="HW logo" class="logo" src="../assets/logo.png">
+    <nav class="page-header">
+        <img alt="HW logo" class="page-header-logo" src="../assets/logo.png">
         <ul>
             <li><router-link to="/">home</router-link></li>
             <li><router-link to="/admin">admin</router-link></li>
@@ -15,19 +15,19 @@ export default {
 </script>
 
 <style scoped>
-    nav {
-        display: flex;
-        width: 100%;
-        background-color: red;
-    }
-    ul {
-        display: flex;
-        list-style-type: none;
-    }
-    li:not(:last-child) {
-        margin-right: 1em;
-    }
-    .logo {
-        width: 10em;
-    }
+.page-header {
+    display: flex;
+    width: 100%;
+    background-color: red;
+}
+.page-header ul {
+    display: flex;
+    list-style-type: none;
+}
+.page-header li:not(:last-child) {
+    margin-right: 1em;
+}
+.page-header-logo {
+    width: 10em;
+}
 </style>

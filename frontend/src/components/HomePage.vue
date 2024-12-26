@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-page">
     <h6>Available cars:</h6>
     <ul>
       <li v-for="item in items" :key="item.id"><CarCard :car="item"/></li>
@@ -38,10 +38,10 @@ export default {
 </script>
 
 <style scoped>
-h3 {
+.home-page h3 {
   margin: 40px 0 0;
 }
-ul {
+.home-page ul {
   list-style-type: none;
   padding: 0;
   display: grid;
@@ -49,11 +49,8 @@ ul {
   grid-template-rows: repeat(14, auto);
   gap: 20px;
 }
-li {
+.home-page li {
   display: inline-block;
   margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>

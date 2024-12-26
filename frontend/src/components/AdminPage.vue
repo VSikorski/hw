@@ -1,5 +1,5 @@
   <template>
-    <div>
+    <div class="admin-page">
       <h6>Admin Page</h6>
     </div>
   </template>
