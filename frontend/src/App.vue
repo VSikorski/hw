@@ -1,26 +1,19 @@
 <template>
-  <PageHeader />
   <router-view />
 </template>
 
 <script>
-import PageHeader from './components/PageHeader.vue'
-
 export default {
-  name: 'App',
-  components: {
-    PageHeader
-  }
+  name: 'App'
 }
 </script>
 
 <style>
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   height: 100vh;
+  width: 100vw;
+  margin: 0;
+  overflow: hidden;
 }
 
 #app {
@@ -29,11 +22,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: aqua;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 70%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 </style>

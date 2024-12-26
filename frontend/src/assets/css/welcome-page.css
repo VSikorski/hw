@@ -1,0 +1,68 @@
+.welcome-page {
+    height: 100vh;
+    width: 100%;
+    font-family: 'Cooper Black', sans-serif;
+}
+
+.welcome-page-main {
+    height: 85%;
+    width: 100%;
+    background-color: #f05424;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-page-logo {
+    width: 24rem;
+}
+
+.welcome-page-footer-container {
+    height: 15%;
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-page-footer {
+    display: flex;
+    flex: 1;
+    padding: 1rem 3rem;
+}
+
+.welcome-page-footer-heading {
+    flex: 0.7;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 5rem;
+    font-weight: 800;
+}
+
+.welcome-page-footer-list {
+    flex: 0.3;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    column-gap: 5rem;
+    row-gap: 1rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.welcome-page-footer-list li {
+    margin: 0;
+}
+
+.welcome-page-footer-list a {
+    color: inherit;
+    text-decoration: none;
+}

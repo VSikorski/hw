@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="explore-page">
     <h6>Available cars:</h6>
     <ul>
       <li v-for="item in items" :key="item.id"><CarCard :car="item"/></li>
@@ -12,7 +12,7 @@ import axios from 'axios';
 import CarCard from './CarCard.vue';
 
 export default {
-  name: 'HomePage',
+  name: 'ExplorePage',
   components: {
     CarCard
   },
@@ -38,10 +38,10 @@ export default {
 </script>
 
 <style scoped>
-.home-page h3 {
+.explore-page h3 {
   margin: 40px 0 0;
 }
-.home-page ul {
+.explore-page ul {
   list-style-type: none;
   padding: 0;
   display: grid;
@@ -49,7 +49,7 @@ export default {
   grid-template-rows: repeat(14, auto);
   gap: 20px;
 }
-.home-page li {
+.explore-page li {
   display: inline-block;
   margin: 0 10px;
 }
