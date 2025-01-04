@@ -1,0 +1,15 @@
+.explore-page {
+    background-color: aquamarine;
+}
+
+.explore-page-list {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(auto, auto);
+    gap: 20px;
+}
+
+.explore-page-header {
+    margin: 40px 0 0;
+}

@@ -109,11 +109,7 @@ export default {
             const values = line.split(',');
             const entry = {};
             header.forEach((hd, idx) => {
-              if (hd == 'id' || hd == 'year' || hd == 'setCount') {
-                entry[hd] = parseInt(values[idx], 10);
-              } else {
-                entry[hd] = values[idx];
-              }
+              entry[hd] = values[idx];
             });
             return entry;
           });

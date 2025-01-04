@@ -7,7 +7,7 @@ const associateModels = require('./models/associations');
 associateModels();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
 
 /* ---------------------------------- REST API ---------------------------------- */
 
@@ -78,29 +78,25 @@ app.post('/api/post/series/bulk', async (req, res) => {
         series.setCount = parseInt(series.setCount, 10);
 
         if (isNaN(series.id)) {
-            messageLog += '- Series is missing a valid `id` and was skipped.\n';
+            messageLog += '- Series is missing `id` parameter.\n';
             return;
         }
         if (!series.type) {
-            messageLog += `- Series with id: ${series.id} is missing the required parameter \`type\` and was skipped.\n`;
+            messageLog += `- Series with id: ${series.id} is missing the required parameter \`type\`.\n`;
             return;
         }
         if (!series.name) {
-            messageLog += `- Series with id: ${series.id} is missing the required parameter \`name\` and was skipped.\n`;
+            messageLog += `- Series with id: ${series.id} is missing the required parameter \`name\`.\n`;
             return;
         }
         if (isNaN(series.year)) {
-            messageLog += `- Series with id: ${series.id} is missing a valid \`year\` and was skipped.\n`;
-            return;
-        }
-        if (isNaN(series.setCount)) {
-            messageLog += `- Series with id: ${series.id} is missing a valid \`setCount\` and was skipped.\n`;
+            messageLog += `- Series with id: ${series.id} is missing a valid \`year\`.\n`;
             return;
         }
 
         const dupSeries = await Series.findByPk(series.id);
         if (dupSeries) {
-            messageLog += `- Series with id: ${series.id} contains a duplicate in the database and was skipped.\n`;
+            messageLog += `- Series with id: ${series.id} contains a duplicate in the database.\n`;
             return;
         }
 
@@ -116,7 +112,7 @@ app.post('/api/post/series/bulk', async (req, res) => {
     await Promise.all(operations);
 
     const responseMessage = seriesArr.length > 0 
-        ? 'Series were successfully inserted.'
+        ? `${seriesArr.length} series records successfully inserted.`
         : 'No records were inserted.';
     
     return res.status(seriesArr.length > 0 ? 201 : 400).json({ 
@@ -395,5 +391,86 @@ app.post('/api/post/car', async (req, res) => {
         return res.status(500).json({ error: 'Error occurred while inserting car record' });
     }
 })
+
+app.post('/api/post/cars/bulk', async (req, res) => {
+    const carData = req.body;
+    let carArr = [];
+    let messageLog = '';
+
+    if (!Array.isArray(carData)) {
+        return res.status(400).json({ error: 'Message body must be an array.' });
+    }
+    if (carData.length === 0) {
+        return res.status(400).json({ error: 'Array cannot be empty.' });
+    }
+
+    const operations = carData.map(async (car) => {
+        car.year = parseInt(car.year, 10);
+
+        seriesNames = [car.series_1, car.series_2, car.series_3];
+        for (let i = 0; i < seriesNames.length; i++) {
+            if (seriesNames[i]) {
+                if (seriesNames[i] == 'null') {
+                    car[`series_${i + 1}`] = 0;
+                    continue;
+                }
+                try {
+                    const series = await Series.findOne({
+                        where: { name: seriesNames[i] }
+                    });
+        
+                    if (series) {
+                        car[`series_${i + 1}`] = series.id, 10;
+                    } else {
+                        messageLog += `- Series with name: ${seriesNames[i]} not found.\n`;
+                    }
+                } catch (error) {
+                    messageLog += `- Error finding series for car with id: ${car.id}. Error: ${error.message}\n`;
+                }
+            }
+        }
+
+        if (!car.id) {
+            messageLog += '- Car is missing `id` parameter.\n';
+            return;
+        }
+        if (!car.name) {
+            messageLog += `- Car with id: ${car.id} is missing the required parameter \`name\`.\n`;
+            return;
+        }
+        if (!car.year) {
+            messageLog += `- Car with id: ${car.id} is missing the required parameter \`year\`.\n`;
+            return;
+        }
+
+        const dupCar = await Car.findByPk(car.id);
+        if (dupCar) {
+            messageLog += `- Car with id: ${car.id} contains a duplicate in the database.\n`;
+            return;
+        }
+
+        try {
+            const newCar = await Car.create(car);
+            carArr.push(newCar);
+        } catch (error) {
+            console.log(error);
+            messageLog += `- Error creating a new car record with id: ${car.id}. Error: ${error.message}\n`;
+        }
+
+    });
+
+    await Promise.all(operations);
+
+    const responseMessage = carArr.length > 0 
+        ? `${carArr.length} car records successfully inserted.`
+        : 'No records were inserted.';
+
+    return res.status(carArr.length > 0 ? 201 : 400).json({ 
+        message: responseMessage, 
+        log: messageLog, 
+        insertedRecords: carArr 
+    });
+})
+
 
 module.exports = app;
