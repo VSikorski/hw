@@ -1,13 +1,15 @@
 <template>
-  <div class="explore-page">
-    <h6>Available cars:</h6>
-    <ul>
-      <li v-for="item in items" :key="item.id"><CarCard :car="item"/></li>
+  <div class="explore-page container">
+    <h6 class="explore-page-header">Available cars:</h6>
+    <ul class="explore-page-list">
+      <li v-for="item in items" :key="item.id" class="explore-page-item"><CarCard :car="item"/></li>
     </ul>
   </div>
 </template>
 
 <script>
+import '../assets/css/general.css';
+import '../assets/css/explore-page.css';
 import axios from 'axios';
 import CarCard from './CarCard.vue';
 
@@ -36,21 +38,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.explore-page h3 {
-  margin: 40px 0 0;
-}
-.explore-page ul {
-  list-style-type: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(14, auto);
-  gap: 20px;
-}
-.explore-page li {
-  display: inline-block;
-  margin: 0 10px;
-}
-</style>
