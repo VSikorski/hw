@@ -1,0 +1,12 @@
+.home-page {
+    width: 70%;
+    overflow-x: hidden; 
+    overflow-y: hidden;
+}
+
+.home-page-list {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(auto-fill, auto);
+}

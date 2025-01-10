@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .car-card {
-    width: 10rem;
+    width: 15rem;
     height: 14rem;
     background-color: bisque;
 }

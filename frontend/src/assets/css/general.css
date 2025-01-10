@@ -1,23 +1,12 @@
+html {
+    margin: 0;
+    width: 100vw;
+}
+
 body {
     margin: 0;
-}
-
-.container {
-    width: 70%;
-}
-
-.disp-flex {
+    background-color: rgb(240, 240, 240);
+    overflow-x: hidden;
     display: flex;
-}
-
-.alg-start {
-    align-items: flex-start;
-}
-
-.just-start {
-    justify-content: flex-start;
-}
-
-.just-end {
-    justify-content: flex-end;
+    flex-direction: column;
 }

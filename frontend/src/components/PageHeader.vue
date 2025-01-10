@@ -1,33 +1,39 @@
 <template>
-    <nav class="page-header">
-        <img alt="HW logo" class="page-header-logo" src="../assets/logo.png">
-        <ul>
-            <li><router-link to="/">home</router-link></li>
-            <li><router-link to="/admin">admin</router-link></li>
+    <nav class="header">
+
+        <div class="header-logo">
+          <img alt="HW logo" src="../assets/logo.png">
+        </div>
+        
+
+        <ul class="header-list">
+            <li class="header-item"><router-link to="/">Home</router-link></li>
+            <li class="header-item"><router-link to="/">Blog</router-link></li>
+            <li class="header-item"><router-link to="/">My collection</router-link></li>
+            <li class="header-item"><router-link to="/">Wishlist</router-link></li>
         </ul>
+
+        <div class="header-log-in-block">
+            <span class="header-log-in">Log in</span>
+            <span class="header-sign-up">Sign up</span>
+        </div>
     </nav>
 </template>
 
 <script>
-export default {
-    name: 'PageHeader'
-}
-</script>
+import '../assets/css/page-header.css';
 
-<style scoped>
-.page-header {
-    display: flex;
-    width: 100%;
-    background-color: red;
+export default {
+  name: 'PageHeader'
 }
-.page-header ul {
-    display: flex;
-    list-style-type: none;
-}
-.page-header li:not(:last-child) {
-    margin-right: 1em;
-}
-.page-header-logo {
-    width: 10em;
-}
-</style>
+
+window.onscroll = function() {
+    var header = document.querySelector('.header');
+    if (window.scrollY > 0) {
+      header.classList.add('sticky');
+    } else {
+      header.classList.remove('sticky');
+    }
+  };
+  
+</script>
