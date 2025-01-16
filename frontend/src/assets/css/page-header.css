@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
+    background-color: rgb(240, 240, 240);
     font-size: 1.25rem;
     font-weight: 500;
     position: sticky;

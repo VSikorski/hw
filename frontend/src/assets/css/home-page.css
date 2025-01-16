@@ -1,12 +1,27 @@
 .home-page {
-    width: 70%;
+    width: 60%;
     overflow-x: hidden; 
     overflow-y: hidden;
+    display: flex;
+    margin-top: 3rem;
+}
+
+.home-page-cars {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    justify-content: center;
 }
 
 .home-page-list {
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(auto-fill, auto);
+}
+
+.home-page-filters {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
 }

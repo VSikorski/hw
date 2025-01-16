@@ -2,14 +2,20 @@
   <PageHeader />
   <div class="home-page">
    
-    <ul class="home-page-list">
-      <li v-for="item in paginatedItems" :key="item.id" class="home-page-item"><CarCard :car="item" /></li>
-    </ul>
+    <div class="home-page-cars">
+      <ul class="home-page-list">
+        <li v-for="item in paginatedItems" :key="item.id" class="home-page-item"><CarCard :car="item" /></li>
+      </ul>
 
-    <div class="home-page-pagination" v-if="totalPages > 0">
-      <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
-      <button v-for="page in totalPages" :key="page" @click="changePage(page)" :class="{ active: currentPage === page }">{{ page }}</button>
-      <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">Next</button>
+      <div class="home-page-pagination" v-if="totalPages > 0">
+        <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
+        <button v-for="page in totalPages" :key="page" @click="changePage(page)" :class="{ active: currentPage === page }">{{ page }}</button>
+        <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">Next</button>
+      </div>
+    </div>
+
+    <div class="home-page-filters">
+      filters
     </div>
 
   </div>
@@ -32,7 +38,7 @@ export default {
     return {
       items: [],
       currentPage: 1,
-      itemsPerPage: 52,
+      itemsPerPage: 51,
     }
   },
   mounted() {
@@ -52,6 +58,7 @@ export default {
     changePage(page) {
       if (page >= 1 && page <= this.totalPages) {
         this.currentPage = page;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     },
     async fetchItems() {

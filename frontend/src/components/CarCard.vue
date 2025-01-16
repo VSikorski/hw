@@ -1,11 +1,15 @@
 <template>
     <div class="car-card">
-        <h6>{{ car.name }}</h6>
-        <img :alt=car.name :src=car.image>
+        <img :alt=car.name :src=car.image class="car-card-img">
+        <div class="car-card-text">
+            <p class="car-card-name">{{ car.name }}</p>
+        </div>
     </div>
 </template>
 
 <script>
+import '../assets/css/car-card.css';
+
 export default {
     name: 'CarCard',
     props: {
@@ -16,14 +20,3 @@ export default {
     }
 }   
 </script>
-
-<style scoped>
-.car-card {
-    width: 15rem;
-    height: 14rem;
-    background-color: bisque;
-}
-.car-card img {
-    width: 90%;
-}
-</style>
